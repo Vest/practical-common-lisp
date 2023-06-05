@@ -28,6 +28,13 @@
     (loop (add-record (prompt-for-cd))
           (if (not (y-or-n-p "Another? [y/n]")) (return))))
 
+    (defun save-db (filename)
+      (with-open-file (out filename
+                           :direction :output
+                           :if-exists :supersede)
+        (with-standard-io-syntax
+          (print *db* out))))
+
     (add-record (make-cd "Roses" "Kathy Mattea" 7 t))
     (add-record (make-cd "Fly" "Dixie Chicks" 8 t))
     (add-record (make-cd "Home" "Dixie Chicks" 9 t))
